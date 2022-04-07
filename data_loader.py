@@ -4,8 +4,25 @@ data_loader.py
 
     @author: Nicholas Nordstrom
 """
-
 import pandas as pd
+from sklearn.datasets import make_blobs
+
+
+def generate_dataset(n_clusters: int, n_points: int = 100, std: float = 1.0, min: float = -10, max: float = 10, random_state : int = None):
+    """
+    generates a two dimensional set of points
+    :param n_clusters: number of clusters to generate
+    :param n_points: number of total points to generate for all clusters
+    :param std: standard deviation of cluster points
+    :param min: minimum point value
+    :param max: maximum point value
+    :param random_state: random generator seed
+    :return: X, array of points shape (n_points, 2)
+    :return: y, array of point cluster identity
+    :return: centers, center point for each cluster
+    """
+    X, y, centers = make_blobs(n_samples=n_points, n_features=2, centers=n_clusters, cluster_std=std, center_box=(min, max), return_centers=True, random_state=random_state)
+    return X, y, centers
 
 
 def _parse_site_(row):
