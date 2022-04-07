@@ -1,5 +1,5 @@
 """
-ImageProcessing.py
+image_processing.py
     Main File for Image Processing Sub routines
 
     @author Nicholas Nordstrom
