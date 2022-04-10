@@ -7,10 +7,10 @@ models.py
 import time
 from tensorflow.keras import models, layers
 from tensorflow.python.keras.applications import densenet, mobilenet, inception_v3, efficientnet
+from sklearn.cluster import DBSCAN, KMeans
 
 
-def mobile_net(input_shape, output_shape, verbose=False, loss='binary_crossentropy', activation='softmax',
-               optimizer='adam', metrics=['accuracy']):
+def mobile_net(input_shape, output_shape=1, verbose=False, loss='mean_squared_error', activation='linear', optimizer='adam', metrics=['accuracy']):
     """
     :param loss: loss function to calculate loss between epochs
     :@author: https://towardsdatascience.com/step-by-step-vgg16-implementation-in-keras-for-beginners-a833c686ae6c
@@ -34,7 +34,7 @@ def mobile_net(input_shape, output_shape, verbose=False, loss='binary_crossentro
     return model, time.time() - start
 
 
-def inception_v3(input_shape, output_shape, verbose=False, loss='binary_crossentropy', activation='softmax', optimizer='adam', metrics=['accuracy']):
+def inception_v3(input_shape, output_shape=1, verbose=False, loss='mean_squared_error', activation='linear', optimizer='adam', metrics=['accuracy']):
     """
     :param loss: loss function to calculate loss between epochs
     :@author: https://docs.w3cub.com/tensorflow~python/tf/keras/applications/inceptionV3
@@ -59,7 +59,7 @@ def inception_v3(input_shape, output_shape, verbose=False, loss='binary_crossent
     return model, time.time() - start
 
 
-def dense_net201(input_shape, output_shape, verbose=False, loss='binary_crossentropy', activation='softmax', optimizer='adam', metrics=['accuracy']):
+def dense_net201(input_shape, output_shape=1, verbose=False, loss='mean_squared_error', activation='linear', optimizer='adam', metrics=['accuracy']):
     """
     :param loss: loss function to calculate loss between epochs
     :@author: https://docs.w3cub.com/tensorflow~python/tf/keras/applications/densenet201
@@ -88,7 +88,7 @@ def dense_net201(input_shape, output_shape, verbose=False, loss='binary_crossent
     return model, time.time() - start
 
 
-def efficient_net(input_shape, output_shape, verbose=False, loss='binary_crossentropy', activation='softmax', optimizer='adam', metrics=['accuracy']):
+def efficient_net(input_shape, output_shape=1, verbose=False, loss='mean_squared_error', activation='linear', optimizer='adam', metrics=['accuracy']):
     """
     :param loss: loss function to calculate loss between functions
     :@author: https://towardsdatascience.com/an-in-depth-efficientnet-tutorial-using-tensorflow-how-to-use-efficientnet-on-a-custom-dataset-1cab0997f65c
@@ -121,7 +121,7 @@ def efficient_net(input_shape, output_shape, verbose=False, loss='binary_crossen
     return model, time.time() - start
 
 
-def vgg16(input_shape, output_shape, verbose=False, loss='binary_crossentropy', activation='softmax', optimizer='adam', metrics=['accuracy']):
+def vgg16(input_shape, output_shape=1, verbose=False, loss='mean_squared_error', activation='linear', optimizer='adam', metrics=['accuracy']):
     """
     :param loss: loss function to calculate loss between epochs
     :@author: https://towardsdatascience.com/step-by-step-vgg16-implementation-in-keras-for-beginners-a833c686ae6c
@@ -145,10 +145,20 @@ def vgg16(input_shape, output_shape, verbose=False, loss='binary_crossentropy', 
     return model, time.time() - start
 
 
-def kmeans():
+def kmeans(k: int, verbose=0):
     """
-    TODO: Implement
-    :return:
+    KMeans clustering algorithm from sklearn
+    :param k: number of clusters present in the dataset
+    :param verbose: option to print more details
+    :return: KMeans clustering model based on k clusters
     """
-    pass
+    model = KMeans(k, verbose=verbose)
+    return model
+
+def dbscan():
+    """
+    dbscan implementation from sklearn
+    :return: dbscan model
+    """
+    return DBSCAN()
 
